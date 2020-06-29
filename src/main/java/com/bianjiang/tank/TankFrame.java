@@ -9,6 +9,8 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
 
     int x = 200, y = 200;
+    Dir dir = Dir.DOWN;
+    private static final int SPEED = 10;
 
 
     public TankFrame() {
@@ -17,8 +19,10 @@ public class TankFrame extends Frame {
         setTitle("tank war");
         setVisible(true);
 
+        //调用键盘监听方法
         this.addKeyListener(new MyKeyListener());
 
+        //调用关闭窗口方法
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -30,9 +34,24 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics s) {
         s.fillRect(x, y, 50, 50);
-        //x += 10;
+        switch (dir) {
+            case LEFT:
+                x -= SPEED;
+                break;
+            case UP:
+                y -= SPEED;
+                break;
+            case RIGHT:
+                x += SPEED;
+                break;
+            case DOWN:
+                y += SPEED;
+                break;
+        }
+
     }
 
+    //键盘监听事件方法
     class MyKeyListener extends KeyAdapter {
 
         boolean bL = false;
@@ -40,6 +59,7 @@ public class TankFrame extends Frame {
         boolean bR = false;
         boolean bD = false;
 
+        //按下按键
         @Override
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
@@ -59,10 +79,10 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
-            //x += 200;
-            // repaint();
+            setMainTankDir();
         }
 
+        //抬起按键
         @Override
         public void keyReleased(KeyEvent e) {
             int key = e.getKeyCode();
@@ -82,6 +102,14 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
+            setMainTankDir();
+        }
+
+        private void setMainTankDir() {
+            if (bL) dir = Dir.LEFT;
+            if (bU) dir = Dir.UP;
+            if (bR) dir = Dir.RIGHT;
+            if (bD) dir = Dir.DOWN;
         }
     }
 }
