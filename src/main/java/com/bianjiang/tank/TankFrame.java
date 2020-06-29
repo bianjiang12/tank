@@ -30,21 +30,21 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics s) {
         System.out.println("paint");
-        s.fillRect(200, 200, 50, 50);
+        s.fillRect(x, y, 50, 50);
         x += 10;
-        y += 10;
     }
 
-    class MyKeyListener extends KeyAdapter{
+    class MyKeyListener extends KeyAdapter {
 
         @Override
         public void keyPressed(KeyEvent e) {
-            super.keyPressed(e);
+            //x += 200;
+            repaint();
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
-            super.keyReleased(e);
+            System.out.println("bian");
         }
     }
 
