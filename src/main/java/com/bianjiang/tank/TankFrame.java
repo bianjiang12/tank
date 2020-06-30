@@ -1,5 +1,6 @@
 package com.bianjiang.tank;
 
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -8,10 +9,7 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
 
-    /*int x = 200, y = 200;
-    Dir dir = Dir.DOWN;
-    private static final int SPEED = 10;*/
-    Tank myTank = new Tank(200, 200, Dir.DOWN);
+    Tank myTank = new Tank(200,200, Dir.DOWN);
 
     Bullet b = new Bullet(300,300,Dir.DOWN);
 
@@ -21,17 +19,18 @@ public class TankFrame extends Frame {
         setTitle("tank war");
         setVisible(true);
 
-        //调用键盘监听方法
         this.addKeyListener(new MyKeyListener());
 
-        //调用关闭窗口方法
         addWindowListener(new WindowAdapter() {
+
             @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
+
         });
     }
+
 
     @Override
     public void paint(Graphics g) {
@@ -39,7 +38,6 @@ public class TankFrame extends Frame {
         b.paint(g);
     }
 
-    //键盘监听事件方法
     class MyKeyListener extends KeyAdapter {
 
         boolean bL = false;
@@ -47,10 +45,10 @@ public class TankFrame extends Frame {
         boolean bR = false;
         boolean bD = false;
 
-        //按下按键
         @Override
         public void keyPressed(KeyEvent e) {
             int key = e.getKeyCode();
+
             switch (key) {
                 case KeyEvent.VK_LEFT:
                     bL = true;
@@ -70,7 +68,6 @@ public class TankFrame extends Frame {
             setMainTankDir();
         }
 
-        //抬起按键
         @Override
         public void keyReleased(KeyEvent e) {
             int key = e.getKeyCode();
@@ -94,13 +91,15 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
-            if (!bL && !bU && bR && bD) myTank.setMoving(false);
+
+            if (!bL && !bU && !bR && !bD) myTank.setMoving(false);
             else {
                 myTank.setMoving(true);
                 if (bL) myTank.setDir(Dir.LEFT);
                 if (bU) myTank.setDir(Dir.UP);
                 if (bR) myTank.setDir(Dir.RIGHT);
                 if (bD) myTank.setDir(Dir.DOWN);
+
             }
         }
     }
