@@ -6,7 +6,7 @@ public class Bullet {
 
     private static final int SPEED = 2;
 
-    private static final int WIDTH = 10, HEIGTH = 10;
+    private static final int WIDTH = 10, HEIGHT = 10;
 
     private int x, y;
 
@@ -21,7 +21,7 @@ public class Bullet {
     public void paint(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.red);
-        g.fillOval(x, y, WIDTH, HEIGTH);
+        g.fillOval(x, y, WIDTH, HEIGHT);
         g.setColor(c);
         move();
     }
