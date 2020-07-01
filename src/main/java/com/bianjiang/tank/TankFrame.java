@@ -11,9 +11,10 @@ import java.util.List;
 
 public class TankFrame extends Frame {
 
-    Tank myTank = new Tank(200, 200, Dir.DOWN, this);
+    Tank myTank = new Tank(200, 400, Dir.DOWN, this);
 
     List<Bullet> bullets = new ArrayList();
+    List<Tank> tanks = new ArrayList();
     //Bullet b = new Bullet(300, 300, Dir.DOWN);
 
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 800;
@@ -55,8 +56,14 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         myTank.paint(g);
+        //画出子弹
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).paint(g);
+        }
+
+        //画出敌方坦克
+        for (int i = 0; i < tanks.size(); i++) {
+            tanks.get(i).paint(g);
         }
     }
 
