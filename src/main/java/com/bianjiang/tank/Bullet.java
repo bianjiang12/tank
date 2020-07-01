@@ -10,6 +10,8 @@ public class Bullet {
 
     public static final int HEIGHT = ResourcesMgr.bulletD.getHeight();
 
+    Rectangle rect = new Rectangle();
+
     private int x, y;
 
     private Dir dir;
@@ -26,6 +28,11 @@ public class Bullet {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     public Group getGroup() {
@@ -73,6 +80,11 @@ public class Bullet {
                 y += SPEED;
                 break;
         }
+
+        //更新rect
+        rect.x = this.x;
+        rect.y = this.y;
+
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
             living = false;
         }
@@ -85,7 +97,7 @@ public class Bullet {
         }
         Rectangle rectangle1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
         Rectangle rectangle2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
-        if (rectangle1.intersects(rectangle2)) {
+        if (rect.intersects(tank.rect)) {
             tank.die();
             this.die();
             int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;

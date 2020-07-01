@@ -16,6 +16,8 @@ public class Tank {
 
     public static final int HEIGHT = ResourcesMgr.goodTankD.getHeight();
 
+    Rectangle rect = new Rectangle();
+
     private Random random = new Random();
 
     private boolean moving = true;
@@ -64,6 +66,11 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     public Dir getDir() {
@@ -123,6 +130,9 @@ public class Tank {
         }
         //边界检测判断
         boundsCheck();
+        //更新rect
+        rect.x = this.x;
+        rect.y = this.y;
     }
 
     //边界检测判断方法
