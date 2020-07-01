@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Bullet {
 
-    private static final int SPEED = 5;
+    private static final int SPEED = 10;
 
     public static final int WIDTH = ResourcesMgr.bulletD.getWidth();
 
@@ -88,6 +88,7 @@ public class Bullet {
         if (rectangle1.intersects(rectangle2)) {
             tank.die();
             this.die();
+            tf.explodes.add(new Explode(x, y, tf));
         }
     }
 

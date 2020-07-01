@@ -22,6 +22,8 @@ public class Explode {
         this.x = x;
         this.y = y;
         this.tf = tf;
+
+        new Thread(() -> new Audio("audio/explode.wav").play()).run();
     }
 
 
@@ -29,7 +31,7 @@ public class Explode {
 
         g.drawImage(ResourcesMgr.explodes[step++], x, y, null);
         if (step >= ResourcesMgr.explodes.length) {
-            step = 0;
+            tf.explodes.remove(this);
         }
     }
 
