@@ -1,6 +1,9 @@
 package com.bianjiang.tank;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 //封装坦克属性成一个坦克的对象
 public class Tank {
@@ -39,10 +42,21 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        Color c = g.getColor();
-        g.setColor(Color.yellow);
-        g.fillRect(x, y, 50, 50);
-        g.setColor(c);
+
+        switch (dir) {
+            case LEFT:
+                g.drawImage(ResourcesMgr.tankL, x, y, null);
+                break;
+            case UP:
+                g.drawImage(ResourcesMgr.tankU, x, y, null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourcesMgr.tankR, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ResourcesMgr.tankD, x, y, null);
+                break;
+        }
         move();
     }
 
