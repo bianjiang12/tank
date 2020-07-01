@@ -121,11 +121,11 @@ public class Tank {
                 randomDir();
             }
         }
-        //边界判断
+        //边界检测判断
         boundsCheck();
     }
 
-    //边界判断方法
+    //边界检测判断方法
     private void boundsCheck() {
         if (this.x < 2) {
             x = 2;
