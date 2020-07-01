@@ -12,9 +12,9 @@ public class Tank {
 
     private static final int SPEED = 5;
 
-    public static final int WIDTH = ResourcesMgr.tankD.getWidth();
+    public static final int WIDTH = ResourcesMgr.goodTankD.getWidth();
 
-    public static final int HEIGHT = ResourcesMgr.tankD.getHeight();
+    public static final int HEIGHT = ResourcesMgr.goodTankD.getHeight();
 
     private Random random = new Random();
 
@@ -79,16 +79,16 @@ public class Tank {
         if (!living) tf.tanks.remove(this);
         switch (dir) {
             case LEFT:
-                g.drawImage(ResourcesMgr.tankL, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourcesMgr.goodTankL : ResourcesMgr.badTankL, x, y, null);
                 break;
             case UP:
-                g.drawImage(ResourcesMgr.tankU, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourcesMgr.goodTankU : ResourcesMgr.badTankU, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(ResourcesMgr.tankR, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourcesMgr.goodTankR : ResourcesMgr.badTankR, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(ResourcesMgr.tankD, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourcesMgr.goodTankD : ResourcesMgr.badTankD, x, y, null);
                 break;
         }
         move();
