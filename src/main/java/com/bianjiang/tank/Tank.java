@@ -1,9 +1,6 @@
 package com.bianjiang.tank;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 //封装坦克属性成一个坦克的对象
 public class Tank {
@@ -13,6 +10,10 @@ public class Tank {
     private Dir dir;
 
     private static final int SPEED = 10;
+
+    public static final int WIDTH = ResourcesMgr.tankD.getWidth();
+
+    public static final int HEIGHT = ResourcesMgr.tankD.getHeight();
 
     private boolean moving = false;
 
@@ -80,6 +81,8 @@ public class Tank {
     }
 
     public void fire() {
-        tf.bullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
+        int bX = this.x + Tank.WIDTH / 2 + Bullet.WIDTH / 2;
+        int bY = this.y + Tank.HEIGHT / 2 + Bullet.HEIGHT / 2;
+        tf.bullets.add(new Bullet(bX, bY, this.dir, this.tf));
     }
 }

@@ -6,7 +6,9 @@ public class Bullet {
 
     private static final int SPEED = 2;
 
-    private static final int WIDTH = 10, HEIGHT = 10;
+    public static final int WIDTH = ResourcesMgr.bulletD.getWidth();
+
+    public static final int HEIGHT = ResourcesMgr.bulletD.getHeight();
 
     private int x, y;
 
@@ -24,14 +26,24 @@ public class Bullet {
     }
 
     public void paint(Graphics g) {
-        if (!live){
+        if (!live) {
             tf.bullets.remove(this);
         }
 
-        Color c = g.getColor();
-        g.setColor(Color.red);
-        g.fillOval(x, y, WIDTH, HEIGHT);
-        g.setColor(c);
+        switch (dir) {
+            case LEFT:
+                g.drawImage(ResourcesMgr.bulletL, x, y, null);
+                break;
+            case UP:
+                g.drawImage(ResourcesMgr.bulletU, x, y, null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourcesMgr.bulletR, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ResourcesMgr.bulletD, x, y, null);
+                break;
+        }
         move();
     }
 
@@ -51,7 +63,7 @@ public class Bullet {
                 break;
         }
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
-                live = false;
+            live = false;
         }
     }
 }
