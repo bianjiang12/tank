@@ -10,7 +10,7 @@ public class Tank {
 
     private Dir dir;
 
-    private static final int SPEED = 2;
+    private static final int SPEED = 5;
 
     public static final int WIDTH = ResourcesMgr.tankD.getWidth();
 
@@ -75,10 +75,8 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-
         //如果坦克死亡的话，移除list里面的坦克
         if (!living) tf.tanks.remove(this);
-
         switch (dir) {
             case LEFT:
                 g.drawImage(ResourcesMgr.tankL, x, y, null);
@@ -96,6 +94,7 @@ public class Tank {
         move();
     }
 
+    //坦克移动方法
     private void move() {
         if (!moving) return;
 
@@ -113,16 +112,27 @@ public class Tank {
                 y += SPEED;
                 break;
         }
-        if (random.nextInt(10) > 8) {
+        if (this.group == Group.BAD && random.nextInt(100) > 95) {
             this.fire();
+
+            //给敌方坦克添加随机方向移动
+            // 如果想让地方坦克慢点改变方向，可以把 && random.nextInt(100) > 95 添加到this.group == Group.BAD后面
+            if (this.group == Group.BAD) {
+                randomDir();
+            }
         }
+    }
+
+    //敌方坦克随机方向移动方法
+    private void randomDir() {
+        this.dir = Dir.values()[random.nextInt(4)];
     }
 
     public void fire() {
         int bX = this.x + Tank.WIDTH / 6 + Bullet.WIDTH / 6;
         int bY = this.y + Tank.HEIGHT / 6 + Bullet.HEIGHT / 6;
         tf.bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tf));
-        new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
+        new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
     }
 
     //坦克死亡
