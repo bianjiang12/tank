@@ -119,8 +119,8 @@ public class Tank {
     }
 
     public void fire() {
-        int bX = this.x + Tank.WIDTH / 3 + Bullet.WIDTH / 3;
-        int bY = this.y + Tank.HEIGHT / 3 + Bullet.HEIGHT / 3;
+        int bX = this.x + Tank.WIDTH / 6 + Bullet.WIDTH / 6;
+        int bY = this.y + Tank.HEIGHT / 6 + Bullet.HEIGHT / 6;
         tf.bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tf));
     }
 

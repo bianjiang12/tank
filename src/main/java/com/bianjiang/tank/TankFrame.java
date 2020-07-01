@@ -18,7 +18,7 @@ public class TankFrame extends Frame {
     //Bullet b = new Bullet(300, 300, Dir.DOWN);
     Explode e = new Explode(100, 100, this);
 
-    static final int GAME_WIDTH = 800, GAME_HEIGHT = 800;
+    static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
