@@ -122,6 +122,7 @@ public class Tank {
         int bX = this.x + Tank.WIDTH / 6 + Bullet.WIDTH / 6;
         int bY = this.y + Tank.HEIGHT / 6 + Bullet.HEIGHT / 6;
         tf.bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tf));
+        new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
     }
 
     //坦克死亡
