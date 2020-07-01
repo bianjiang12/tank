@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Bullet {
 
-    private static final int SPEED = 2;
+    private static final int SPEED = 5;
 
     public static final int WIDTH = ResourcesMgr.bulletD.getWidth();
 
@@ -18,11 +18,22 @@ public class Bullet {
 
     private TankFrame tf = null;
 
-    public Bullet(int x, int y, Dir dir, TankFrame tf) {
+    private Group group = Group.BAD;
+
+    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public void paint(Graphics g) {
@@ -69,6 +80,9 @@ public class Bullet {
 
     //判断子弹和坦克是否相交
     public void collideWith(Tank tank) {
+        if (this.group == tank.getGroup()) {
+            return;
+        }
         Rectangle rectangle1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
         Rectangle rectangle2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
         if (rectangle1.intersects(rectangle2)) {

@@ -1,6 +1,7 @@
 package com.bianjiang.tank;
 
 import java.awt.*;
+import java.util.Random;
 
 //封装坦克属性成一个坦克的对象
 public class Tank {
@@ -9,15 +10,19 @@ public class Tank {
 
     private Dir dir;
 
-    private static final int SPEED = 10;
+    private static final int SPEED = 2;
 
     public static final int WIDTH = ResourcesMgr.tankD.getWidth();
 
     public static final int HEIGHT = ResourcesMgr.tankD.getHeight();
 
-    private boolean moving = false;
+    private Random random = new Random();
+
+    private boolean moving = true;
 
     private boolean living = true;
+
+    private Group group = Group.BAD;
 
     private TankFrame tf = null;
 
@@ -45,10 +50,19 @@ public class Tank {
         this.y = y;
     }
 
-    public Tank(int x, int y, Dir dir, TankFrame tf) {
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
 
@@ -99,12 +113,15 @@ public class Tank {
                 y += SPEED;
                 break;
         }
+        if (random.nextInt(10) > 8) {
+            this.fire();
+        }
     }
 
     public void fire() {
         int bX = this.x + Tank.WIDTH / 2 + Bullet.WIDTH / 2;
         int bY = this.y + Tank.HEIGHT / 2 + Bullet.HEIGHT / 2;
-        tf.bullets.add(new Bullet(bX, bY, this.dir, this.tf));
+        tf.bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tf));
     }
 
     //坦克死亡
