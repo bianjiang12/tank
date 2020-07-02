@@ -95,8 +95,8 @@ public class Bullet {
         if (this.group == tank.getGroup()) {
             return;
         }
-        Rectangle rectangle1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-        Rectangle rectangle2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+        //Rectangle rectangle1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+        //Rectangle rectangle2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
         if (rect.intersects(tank.rect)) {
             tank.die();
             this.die();
